@@ -1,0 +1,13 @@
+
+<!-- image_list.html -->
+<ul>
+    {% for photo in photos %}
+    <li>
+        <img src="{{ photo.image.url }}" alt="{{ photo.image.name }}">
+        <a href="{% url 'download_and_delete_image' photo.pk %}">다운로드</a>
+    </li>
+    {% endfor %}
+</ul>
+
+
+

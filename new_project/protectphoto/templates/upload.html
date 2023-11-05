@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<header>
+    <img src="\static\safeAIPI_logo.png" width="500" class="img-fluid mx-auto d-block" alt="safeAIPI_logo">
+    <div class="container">
+        <p class="text-center">SafePI-AI: One-Click Privacy for Your Photos
+            <br> You can anonymize your location & privacy data with a single click.
+        </p>
+    </div>
+</header>
+
+    <div class="border border-3 border-dark" style="margin-left: 300px; margin-right: 300px;">
+        <div>
+            <p class="fs-3 text-center mt-2">
+                Sample of 'Do SafePI'
+            </p>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row mx-5" >
+                <div class="col-md-6 b bg-secondary bg-opacity-50">
+                    <p class="fs-4 text-center mt-2">
+                        Original Image
+                    </p>
+
+                    <div>
+                        <img src="\static\sampleimg.jpg" width="700" class="img-fluid mx-auto d-block mb-4" alt="sampleimgBefore">
+                    </div>
+
+                    <div>
+                        <p class="fs-5 text-center text-decoration-underline">EXIF Data</p>
+                        <p class="text-center mb-4">
+                            GPS Info : 매송고색로
+                            <br>Date Time : 2023-09-06 10:54
+                            <br>Create Date : 2023-09-06 10:54
+                            <br>Owner Name : Jimin, Kim
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 b bg-primary bg-gradient bg-opacity-25">
+                    <p class="fs-4 text-center mt-2">
+                        SafePI Image
+                    </p>
+
+                    <div>
+                        <img src="\static\sampleimgSafePI.jpg" width="700" class="img-fluid mx-auto d-block mb-4" alt="sampleimgBefore">
+                    </div>
+
+                    <div>
+                        <p class="fs-5 text-center text-decoration-underline">EXIF Data</p>
+                        <p class="text-center mb-4">
+                            GPS Info : None
+                            <br>Date Time : None
+                            <br>Create Date : None
+                            <br>Owner Name : None
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <style>
+            .errorlist {
+            display: none;
+            }
+        </style>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="text-center">
+                <label for="image" class="btn btn-outline-primary my-2">
+                    <!--{{ form.as_p }}-->
+                    <span id="chooseImageText"> Choose Image</span>
+                    <input type="file" name="image" id="image" style="display: none;" onchange="displayFileName(this)" multiple>
+                </label>
+                <input type="file" name="image" id="image" style="display: none;" onchange="displayFileName(this)" multiple>
+                <span id="noImageChosenText"></span>
+                <button type="submit" class="btn btn-outline-primary">Do SafePI</button>
+            </div>
+        </form>
+
+<script>
+    function displayFileName(input) {
+        var chooseImageText = document.getElementById('chooseImageText');
+        var noImageChosenText = document.getElementById('noImageChosenText');
+
+        if (input.files && input.files.length > 0) {
+            var filenames = [];
+            for (var i = 0; i < input.files.length; i++) {
+                filenames.push(input.files[i].name);
+            }
+            chooseImageText.innerText = filenames.join(', \n');
+            chooseImageText.style.display = 'inline';
+            noImageChosenText.style.display = 'none';
+        } else {
+            chooseImageText.innerText = '';
+            chooseImageText.style.display = 'none';
+            noImageChosenText.style.display = 'inline';
+        }
+    }
+</script>
+
+
+    </div>
+
+    <footer class="text-center mt-3">
+        <p class="muted">
+            <a href="#" data-bs-toggle="tooltip" class="custom-tooltip"
+            data-bs-original-title="EXIF data is generated when taking photos and poses a risk of exposing personal information.
+            Use SafePI-AI to delete both location and EXIF information from your photos in one go."
+            style="margin-bottom: 5px;">
+                Why do I have to erase EXIF data?
+            </a>
+        </p>
+
+        <script>
+            var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        </script>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>'''
+
+
+{% endblock %}

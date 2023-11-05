@@ -1,0 +1,12 @@
+<!-- image_list.html -->
+<ul>
+    {% for ocr_result in ocr_results %}
+    <li>
+        <img src="{{ ocr_result.image_path.url }}" alt="{{ ocr_result.image_path.name }}">
+    </li>
+    {% endfor %}
+</ul>
+
+
+
+
